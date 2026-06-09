@@ -1,6 +1,11 @@
 {
   "version": 2,
-  "buildCommand": "",
-  "outputDirectory": ".",
-  "framework": null
+  "builds": [
+    { "src": "index.html", "use": "@vercel/static" },
+    { "src": "api/tasas.js", "use": "@vercel/node" }
+  ],
+  "routes": [
+    { "src": "/api/tasas", "dest": "/api/tasas.js" },
+    { "src": "/(.*)", "dest": "/index.html" }
+  ]
 }
