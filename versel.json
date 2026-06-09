@@ -5,7 +5,6 @@
     { "src": "api/tasas.js", "use": "@vercel/node" }
   ],
   "routes": [
-    { "src": "/api/tasas", "dest": "/api/tasas.js" },
-    { "src": "/(.*)", "dest": "/public/$1" }
+    { "src": "/api/tasas", "dest": "/api/tasas.js" }
   ]
 }
