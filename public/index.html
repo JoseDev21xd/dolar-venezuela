@@ -1,22 +1,29 @@
+<!-- Esto le dice al navegador que es un documento HTML moderno -->
 <!DOCTYPE html>
 <html lang="es">
 
 <head>
+  <!-- Permite caracteres especiales como tildes y ñ -->
   <meta charset="UTF-8">
+  <!-- Hace la página responsive en celulares -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dólar Venezuela</title>
+  <!-- Aquí enlazaremos el CSS después -->
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
+  <!-- CONTENEDOR PRINCIPAL: centra todo el contenido -->
   <div class="container">
 
+    <!-- ENCABEZADO -->
     <header class="header">
       <h1>💵 Dólar Venezuela</h1>
       <span class="badge">● En vivo</span>
     </header>
 
+    <!-- GRILLA: contiene las 2 tarjetas lado a lado -->
     <div class="grid">
 
       <!-- TARJETA 1: Dólar BCV -->
@@ -25,13 +32,16 @@
           <span class="flag">🇺🇸</span>
           <h2>Dólar BCV</h2>
         </div>
+        <!-- id="usd-rate": JS lo usará para poner el valor real -->
         <p class="rate-label">1 USD =</p>
         <p class="rate-value" id="usd-rate">Cargando...</p>
         <hr>
+        <!-- CALCULADORA USD -->
         <div class="calculator">
           <label>Monto en USD</label>
-          <input type="text" id="usd-input" value="0.00" placeholder="0.00">
-          <p class="result">= <span id="usd-result">Bs. 0,00</span></p>
+      <input type="text" id="usd-input" value="0.00" placeholder="0.00">
+
+          <p class="result">= <span id="usd-result">Bs. 0.00</span></p>
         </div>
       </div>
 
@@ -44,54 +54,25 @@
         <p class="rate-label">1 EUR =</p>
         <p class="rate-value" id="eur-rate">Cargando...</p>
         <hr>
+        <!-- CALCULADORA EUR -->
         <div class="calculator">
           <label>Monto en EUR</label>
-          <input type="text" id="eur-input" value="0.00" placeholder="0.00">
-          <p class="result">= <span id="eur-result">Bs. 0,00</span></p>
+<input type="text" id="eur-input" value="0.00" placeholder="0.00">
+
+          <p class="result">= <span id="eur-result">Bs. 0.00</span></p>
         </div>
       </div>
 
-      <!-- TARJETA 3: Monitor Dólar -->
-      <div class="card">
-        <div class="card-header">
-          <span class="flag">📊</span>
-          <h2>Monitor Dólar</h2>
-        </div>
-        <p class="rate-label">1 USD =</p>
-        <p class="rate-value" id="promedio-rate">Cargando...</p>
-        <hr>
-        <div class="calculator">
-          <label>Monto en USD</label>
-          <input type="text" id="promedio-input" value="0.00" placeholder="0.00">
-          <p class="result">= <span id="promedio-result">Bs. 0,00</span></p>
-        </div>
-      </div>
+    </div> <!-- fin .grid -->
 
-      <!-- TARJETA 4: USDT Binance -->
-      <div class="card">
-        <div class="card-header">
-          <span class="flag">💲</span>
-          <h2>USDT Binance</h2>
-        </div>
-        <p class="rate-label">1 USDT =</p>
-        <p class="rate-value" id="usdt-rate">Cargando...</p>
-        <hr>
-        <div class="calculator">
-          <label>Monto en USDT</label>
-          <input type="text" id="usdt-input" value="0.00" placeholder="0.00">
-          <p class="result">= <span id="usdt-result">Bs. 0,00</span></p>
-        </div>
-      </div>
-
-    </div>
-
+    <!-- PIE DE PÁGINA -->
     <footer>
       <p id="last-update">Última actualización: --</p>
     </footer>
 
-  </div>
+  </div> <!-- fin .container -->
 
-  <script src="main.js"></script>
-
+  <!-- El JS siempre va al final, antes de cerrar body -->
+<script src="main.js"></script>
 </body>
 </html>
