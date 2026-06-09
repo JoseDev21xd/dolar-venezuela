@@ -1,0 +1,144 @@
+/* ── RESET: elimina márgenes raros que pone el navegador por defecto ── */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ── BODY: fondo oscuro y fuente principal ── */
+body {
+  background-color: #0f1117;
+  color: #e2e8f0;
+  font-family: 'Segoe UI', sans-serif;
+  min-height: 100vh;
+  padding: 2rem 1rem;
+}
+
+/* ── CONTAINER: limita el ancho y centra el contenido ── */
+.container {
+  max-width: 800px;
+  margin: 0 auto; /* el truco para centrar: auto en los lados */
+}
+
+/* ── HEADER ── */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.header h1 {
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+/* ── BADGE "En vivo" ── */
+.badge {
+  background-color: #1a3a2a;
+  color: #4ade80;
+  padding: 0.3rem 0.8rem;
+  border-radius: 999px; /* píldora: valor muy alto = bordes redondos */
+  font-size: 0.85rem;
+}
+
+/* ── GRID: pone las 2 tarjetas lado a lado ── */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* 2 columnas iguales */
+  gap: 1.5rem;
+}
+
+/* ── CARD ── */
+.card {
+  background-color: #1a1d27;
+  border: 1px solid #2d3148;
+  border-radius: 16px;
+  padding: 1.5rem;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.card-header h2 {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.flag {
+  font-size: 1.5rem;
+}
+
+/* ── TASA ── */
+.rate-label {
+  font-size: 0.85rem;
+  color: #94a3b8;
+  margin-bottom: 0.25rem;
+}
+
+.rate-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #60a5fa; /* azul claro para destacar */
+  margin-bottom: 1rem;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid #2d3148;
+  margin-bottom: 1rem;
+}
+
+/* ── CALCULADORA ── */
+.calculator label {
+  display: block;
+  font-size: 0.8rem;
+  color: #94a3b8;
+  margin-bottom: 0.4rem;
+}
+
+.calculator input {
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  background-color: #0f1117;
+  border: 1px solid #2d3148;
+  border-radius: 8px;
+  color: #e2e8f0;
+  font-size: 1rem;
+}
+
+.calculator input:focus {
+  outline: none;
+  border-color: #60a5fa; /* borde azul al hacer clic */
+}
+
+.result {
+  margin-top: 0.8rem;
+  font-size: 1.1rem;
+  color: #94a3b8;
+}
+
+.result span {
+  color: #4ade80; /* verde para el resultado */
+  font-weight: 700;
+  font-size: 1.3rem;
+}
+
+/* ── FOOTER ── */
+footer {
+  text-align: center;
+  margin-top: 2rem;
+  color: #475569;
+  font-size: 0.8rem;
+}
+
+/* ── RESPONSIVE: en pantallas pequeñas, 1 columna ── */
+@media (max-width: 600px) {
+  .grid {
+    grid-template-columns: 1fr; /* 1 sola columna en celular */
+  }
+}
