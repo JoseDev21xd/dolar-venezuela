@@ -1,24 +1,16 @@
-// Guardamos las tasas aquí para usarlas en la calculadora
 let tasas = { usd: 0, eur: 0 }
 
-// ── OBTENER Y MOSTRAR LAS TASAS ──────────────────────────────────
 async function cargarTasas() {
-
   try {
-    // Le pedimos los datos a NUESTRO servidor (no al BCV directamente)
- const respuesta = await fetch('/api/tasas')
-
-    // Convertimos la respuesta a objeto JavaScript
+    const respuesta = await fetch('/api/tasas')
     const datos = await respuesta.json()
 
-    // Guardamos las tasas para usarlas en la calculadora
     tasas.usd = datos.usd
     tasas.eur = datos.eur
 
-    // Mostramos los valores en el HTML usando los id que pusimos
-  document.getElementById('usd-rate').textContent = 'Bs. ' + datos.usd.toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
-   document.getElementById('eur-rate').textContent = 'Bs. ' + datos.eur.toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
-   document.getElementById('last-update').textContent = 'Última actualización: ' + datos.actualizacion
+    document.getElementById('usd-rate').textContent = 'Bs. ' + datos.usd.toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+    document.getElementById('eur-rate').textContent = 'Bs. ' + datos.eur.toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+    document.getElementById('last-update').textContent = 'Última actualización: ' + datos.actualizacion
 
   } catch (error) {
     document.getElementById('usd-rate').textContent = 'Error al cargar'
@@ -27,32 +19,31 @@ async function cargarTasas() {
   }
 }
 
-// ── CALCULADORA ──────────────────────────────────────────────────
-// Esta función se ejecuta cada vez que el usuario escribe en el input
 function calcular(moneda) {
+  const input = document.getElementById(moneda + '-input')
+  let valor = input.value.replace(/[^0-9]/g, '')
 
-  // Agarramos el valor que escribió el usuario
-  const monto = parseFloat(document.getElementById(moneda + '-input').value)
+  // Formato caja registradora: los últimos 2 dígitos son decimales
+  valor = (parseInt(valor || 0) / 100).toFixed(2)
+  input.value = valor
 
-  // Si no escribió nada o escribió algo inválido, limpiamos el resultado
-  if (isNaN(monto)) {
-    document.getElementById(moneda + '-result').textContent = 'Bs. 0.00'
-    return
-  }
-
-  // Hacemos la multiplicación según la moneda
+  const monto = parseFloat(valor)
   const tasa = moneda === 'usd' ? tasas.usd : tasas.eur
   const resultado = monto * tasa
 
-  // Mostramos el resultado formateado
-document.getElementById(moneda + '-result').textContent = 'Bs. ' + resultado.toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+  document.getElementById(moneda + '-result').textContent =
+    'Bs. ' + resultado.toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
 }
 
-// ── EVENTOS ──────────────────────────────────────────────────────
-// Escuchamos cuando el usuario escribe en cada input
 document.getElementById('usd-input').addEventListener('input', () => calcular('usd'))
 document.getElementById('eur-input').addEventListener('input', () => calcular('eur'))
 
-// ── ARRANCAR ─────────────────────────────────────────────────────
-// Cuando carga la página, pedimos las tasas inmediatamente
 cargarTasas()
+
+document.getElementById('usd-input').addEventListener('click', function() {
+  this.setSelectionRange(this.value.length, this.value.length)
+})
+
+document.getElementById('eur-input').addEventListener('click', function() {
+  this.setSelectionRange(this.value.length, this.value.length)
+})
