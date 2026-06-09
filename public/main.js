@@ -16,9 +16,9 @@ async function cargarTasas() {
     tasas.eur = datos.eur
 
     // Mostramos los valores en el HTML usando los id que pusimos
-    document.getElementById('usd-rate').textContent = 'Bs. ' + datos.usd.toFixed(2)
-    document.getElementById('eur-rate').textContent = 'Bs. ' + datos.eur.toFixed(2)
-    document.getElementById('last-update').textContent = 'Última actualización: ' + datos.actualizacion
+  document.getElementById('usd-rate').textContent = 'Bs. ' + datos.usd.toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+   document.getElementById('eur-rate').textContent = 'Bs. ' + datos.eur.toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+   document.getElementById('last-update').textContent = 'Última actualización: ' + datos.actualizacion
 
   } catch (error) {
     document.getElementById('usd-rate').textContent = 'Error al cargar'
@@ -45,7 +45,7 @@ function calcular(moneda) {
   const resultado = monto * tasa
 
   // Mostramos el resultado formateado
-  document.getElementById(moneda + '-result').textContent = 'Bs. ' + resultado.toFixed(2)
+document.getElementById(moneda + '-result').textContent = 'Bs. ' + resultado.toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
 }
 
 // ── EVENTOS ──────────────────────────────────────────────────────
