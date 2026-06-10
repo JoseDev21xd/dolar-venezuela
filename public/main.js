@@ -1,4 +1,4 @@
-let tasas = { usd: 0, eur: 0 }
+let tasas = { usd: 0, eur: 0, usdt: 0 }
 
 async function cargarTasas() {
   try {
@@ -7,14 +7,17 @@ async function cargarTasas() {
 
     tasas.usd = datos.usd
     tasas.eur = datos.eur
+    tasas.usdt = datos.usdt
 
     document.getElementById('usd-rate').textContent = 'Bs. ' + datos.usd.toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
     document.getElementById('eur-rate').textContent = 'Bs. ' + datos.eur.toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+    document.getElementById('usdt-rate').textContent = 'Bs. ' + datos.usdt.toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
     document.getElementById('last-update').textContent = 'Última actualización: ' + datos.actualizacion
 
   } catch (error) {
     document.getElementById('usd-rate').textContent = 'Error al cargar'
     document.getElementById('eur-rate').textContent = 'Error al cargar'
+    document.getElementById('usdt-rate').textContent = 'Error al cargar'
     console.log('Error:', error.message)
   }
 }
@@ -23,12 +26,14 @@ function calcular(moneda) {
   const input = document.getElementById(moneda + '-input')
   let valor = input.value.replace(/[^0-9]/g, '')
 
-  // Formato caja registradora: los últimos 2 dígitos son decimales
   valor = (parseInt(valor || 0) / 100).toFixed(2)
   input.value = valor
 
   const monto = parseFloat(valor)
-  const tasa = moneda === 'usd' ? tasas.usd : tasas.eur
+  const tasa = moneda === 'usd' ? tasas.usd
+              : moneda === 'eur' ? tasas.eur
+              : tasas.usdt
+
   const resultado = monto * tasa
 
   document.getElementById(moneda + '-result').textContent =
@@ -37,8 +42,7 @@ function calcular(moneda) {
 
 document.getElementById('usd-input').addEventListener('input', () => calcular('usd'))
 document.getElementById('eur-input').addEventListener('input', () => calcular('eur'))
-
-cargarTasas()
+document.getElementById('usdt-input').addEventListener('input', () => calcular('usdt'))
 
 document.getElementById('usd-input').addEventListener('click', function() {
   this.setSelectionRange(this.value.length, this.value.length)
@@ -47,3 +51,9 @@ document.getElementById('usd-input').addEventListener('click', function() {
 document.getElementById('eur-input').addEventListener('click', function() {
   this.setSelectionRange(this.value.length, this.value.length)
 })
+
+document.getElementById('usdt-input').addEventListener('click', function() {
+  this.setSelectionRange(this.value.length, this.value.length)
+})
+
+cargarTasas()
